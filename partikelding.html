@@ -1,0 +1,161 @@
+<html>
+<body>
+<style type="text/css">
+	body,html{
+	width:100%;
+	height: 100%;
+	margin:0;
+	padding:0;
+	overflow:hidden;
+	}
+	canvas{
+	position:absolute;
+
+	}
+</style>
+
+<script src="processing.js"></script>
+<script type="text/processing" data-processing-target="mycanvas">
+void setup(){
+	
+
+	size(window.innerWidth,window.innerHeight);
+
+	frameRate(60);
+	background(20, 20, 20);
+
+}
+
+
+
+
+
+var anzahl = 500;
+
+var objarray = [anzahl+1];
+var objarraym = [anzahl+1];
+
+for (int i = 0;i< anzahl;i++){
+	objarray[i]=new schlange();
+}
+
+for (int i = 0;i< anzahl;i++){
+	objarraym[i]=new schlangem();
+}
+
+
+
+void draw() {
+
+   fill(0, 0, 0,10); 
+   rect(-10,-10,window.innerWidth+20,window.innerHeight+20); //fading
+
+	for (int i = 0;i< anzahl;i++){
+	neueSchlange(objarray[i]);
+	}
+
+
+	for (int i = 0;i< anzahl;i++){
+	neueSchlangem(objarraym[i]);
+	}
+
+
+
+
+
+  //println("tst");
+};
+void neueSchlange(ss){
+	fill(150+random(-100,100), 0+random(-100,100), 201,30);  
+ 	stroke(150+random(-100,100), 0+random(-100,100), 201,50);
+    ss.cx = ss.px+random(-(ss.xrand),ss.xrand); 
+    ss.cy = ss.py+random(-(ss.xrand),ss.xrand);//enable for random lines
+    if (mousePressed){
+    	if (mouseX>ss.cx){
+        ss.cx=ss.cx+(mouseX-ss.cx)/50;
+        }
+    	if (mouseX<ss.cx){
+        ss.cx=ss.cx-(ss.cx-mouseX)/50;
+        }
+    	if (mouseY>ss.cy){
+        ss.cy=ss.cy+(mouseY-ss.cy)/50;
+        }
+    	if (mouseY<ss.cy){
+        ss.cy=ss.cy-(ss.cy-mouseY)/50;
+        }
+
+    }
+   	ss.cx = Math.max(0,Math.min(window.innerWidth,ss.cx));
+   	ss.cy = Math.max(0,Math.min(window.innerHeight,ss.cy));
+    triangle(ss.ppx,ss.ppy,ss.px,ss.py,ss.cx,ss.cy);
+  	ss.ppx=ss.px;
+   	ss.ppy=ss.py;
+  	ss.px=ss.cx;
+  	ss.py=ss.cy;
+}
+
+
+void neueSchlangem(ss){
+	fill(200+random(-100,100), 100+random(-100,100), 0,30);  
+ 	stroke(200+random(-100,100), 100+random(-100,100), 0,50);
+    ss.cx = ss.px+random(-(ss.xrand),ss.xrand); 
+    ss.cy = ss.py+random(-(ss.xrand),ss.xrand);//enable for random lines
+      if (mousePressed){
+    	if (mouseX>ss.cx){
+        ss.cx=ss.cx+(mouseX-ss.cx)/50;
+        }
+    	if (mouseX<ss.cx){
+        ss.cx=ss.cx-(ss.cx-mouseX)/50;
+        }
+    	if (mouseY>ss.cy){
+        ss.cy=ss.cy+(mouseY-ss.cy)/50;
+        }
+    	if (mouseY<ss.cy){
+        ss.cy=ss.cy-(ss.cy-mouseY)/50;
+        }
+
+    }	
+   	ss.cx = Math.max(0,Math.min(window.innerWidth,ss.cx));
+   	ss.cy = Math.max(0,Math.min(window.innerHeight,ss.cy));
+    triangle(ss.ppx,ss.ppy,ss.px,ss.py,ss.cx,ss.cy);
+  	ss.ppx=ss.px;
+   	ss.ppy=ss.py;
+  	ss.px=ss.cx;
+  	ss.py=ss.cy;
+}
+
+
+class schlange{
+
+int px = random(0,200);
+int py = random(0,200);
+int ppx = px+random(-20,20);
+int ppy = py+random(-20,20);
+int cx;
+int cy;
+int xrand = 20	;
+int yrand = 20  ;
+int opacity = 49;
+int rstart = 30;
+int gstart = 155;
+}
+
+class schlangem{
+
+int px = random(window.innerWidth-200,window.innerWidth);
+int py = random(window.innerHeight-200,window.innerHeight);
+int ppx = px+random(-20,20);
+int ppy = py+random(-20,20);
+int cx;
+int cy;
+int xrand = 20;
+int yrand = 20  ;
+int opacity = 49;
+int rstart = 30;
+int gstart = 155;
+}
+
+</script>
+<canvas id="mycanvas"></canvas>
+</body>
+</html>
