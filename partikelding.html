@@ -27,50 +27,73 @@ void setup(){
 }
 
 
+  
 
 
-var explarray = [];
-var explosion = function(startX,startY,colorInt){
+public var explarray = [];
+var explosion = function(startX,startY,colorInt,amount,bonus,rocket,maxLife){
+    
     this.x = startX;
     this.y = startY;
-    
+    if (rocket){
+    startY = window.innerHeight;
+    }
+
     
     var bullarray = [];
     
     fill(255, 191, 0);
     
-    this.bullet = function(xpos,ypos,roundedInt){
+    this.bullet = function(xpos,ypos,roundedInt,lifem,lifep,mitboom){
       this.x = xpos;
       this.y = ypos;
       this.xdir = 0;
       this.ydir = 0;
+      this.life  = random(lifem,lifep);
       this.precolor = [[random(200,230),random(100,150),random(0,80)],[random(100,150),random(200,220),random(50,80)],[random(200,230),random(100,150),random(0,200)]];
       this.size = ceil(random(10,35));
       this.color = this.precolor[roundedInt];
+      this.exploded = !mitboom;
+      this.mitBonus = !mitboom;
     };
     
     
-    for (var  i = 0; i<100;i++){
-        bullarray[i] = new this.bullet(startX,startY,colorInt);
+    for (var  i = 0; i<amount;i++){
+        bullarray[i] = new this.bullet(startX,startY,colorInt,20,maxLife,bonus);
+       if (!bonus){
         bullarray[i].xdir = random(-1,1)*10;
         bullarray[i].ydir = random(-1,1)*10;
-        
+        }
+      else{
+        bullarray[i].xdir = random(-0.5,0.5)*10;
+        bullarray[i].ydir = random(-0.3,-1.2)*10;
+      }
     }
     this.life = 0;
     
     this.draw = function() {
-        if (this.life<100){
-        for (var i = 0; i<100;i++){
+       
+        for (var i = 0; i<amount;i++){
+        if(bullarray[i].life+5>=0){
+          if (((bullarray[i].life>=0)&&(!(bullarray[i].exploded))||bullarray[i].mitBonus)){      
          fill(bullarray[i].color[0],bullarray[i].color[1],bullarray[i].color[2]);
          stroke(bullarray[i].color[0]+10,bullarray[i].color[1]+10,bullarray[i].color[2]+10);
          ellipse(bullarray[i].x,bullarray[i].y,bullarray[i].size,bullarray[i].size);  
          bullarray[i].x+=bullarray[i].xdir;
          bullarray[i].y+=bullarray[i].ydir;
          bullarray[i].size-=(bullarray[i].size/100);
+         bullarray[i].life--;
+
+        }
+        else if (!bullarray[i].exploded){
+        append(explarray,new explosion(bullarray[i].x,bullarray[i].y,round(random(0,2)),100,false,false,50));
+        bullarray[i].exploded = true;
+
+        }
+       }
+       }
+
         
-        }
-         this.life++;
-        }
     };
     
 
@@ -78,18 +101,20 @@ var explosion = function(startX,startY,colorInt){
 background(0, 0, 0);
 
 void draw() {
- fill(222, 222, 222,20);
+ fill(10, 10, 10,20);
  rect(-5,-5,10000,10000);  
  for (var i = 0; i<explarray.length;i++){
   explarray[i].draw();   
  }
+ translate(width/2,height/2);
+ scale(0.2);
 
 };
 
 
 
 void mousePressed(){
-    append(explarray,new explosion(mouseX,mouseY,round(random(0,2))));
+    append(explarray,new explosion(mouseX,mouseY,round(random(0,2)),2,true,true,300));
 };
 
 
