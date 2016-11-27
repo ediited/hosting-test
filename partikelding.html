@@ -50,7 +50,15 @@ var explosion = function(startX,startY,colorInt,amount,bonus,rocket,maxLife){
       this.xdir = 0;
       this.ydir = 0;
       this.life  = random(lifem,lifep);
-      this.precolor = [[random(200,230),random(100,150),random(0,80)],[random(100,150),random(200,220),random(50,80)],[random(200,230),random(100,150),random(0,200)]];
+      this.precolor = [
+      [random(200,230),random(100,150),random(0,80)]
+      ,[random(100,150),random(200,220),random(50,80)]
+      ,[random(200,230),random(100,150),random(0,200)]
+      ,[0+random(-30,30),100+random(-30,30),50+random(-30,30)]
+      ,[100+random(-30,30),30+random(-30,30),130+random(-30,30)]
+      ,[50+random(-30,30),160+random(-30,30),30+random(-30,30)]
+      ,[255+random(-30,30),255+random(-30,30),255+random(-30,30)]
+      ];
       this.size = ceil(random(10,35));
       this.color = this.precolor[roundedInt];
       this.exploded = !mitboom;
@@ -86,7 +94,7 @@ var explosion = function(startX,startY,colorInt,amount,bonus,rocket,maxLife){
 
         }
         else if (!bullarray[i].exploded){
-        append(explarray,new explosion(bullarray[i].x,bullarray[i].y,round(random(0,2)),100,false,false,50));
+        append(explarray,new explosion(bullarray[i].x,bullarray[i].y,round(random(0,5)),100,false,false,50));
         bullarray[i].exploded = true;
 
         }
@@ -114,7 +122,7 @@ void draw() {
 
 
 void mousePressed(){
-    append(explarray,new explosion(mouseX,mouseY,round(random(0,2)),2,true,true,300));
+    append(explarray,new explosion(mouseX,mouseY,6,2,true,true,200));
 };
 
 
