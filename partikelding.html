@@ -49,7 +49,7 @@ var explosion = function(startX,startY,colorInt,amount,bonus,rocket,maxLife,minL
       this.y = ypos;
       this.xdir = 0;
       this.ydir = 0;
-      this.life  = random(lifem,lifep);
+      this.life  = random(lifem,lifep)   / 3;
       this.precolor = [
       [random(200,230),random(100,150),random(0,80)]
       ,[random(100,150),random(200,220),random(50,80)]
@@ -59,7 +59,7 @@ var explosion = function(startX,startY,colorInt,amount,bonus,rocket,maxLife,minL
       ,[50+random(-30,30),160+random(-30,30),30+random(-30,30)]
       ,[255+random(-30,30),255+random(-30,30),255+random(-30,30)]
       ];
-      this.size = ceil(random(10,35));
+      this.size = ceil(random(10,35)/3);
       this.color = this.precolor[roundedInt];
       this.exploded = !mitboom;
       this.mitBonus = !mitboom;
@@ -69,12 +69,12 @@ var explosion = function(startX,startY,colorInt,amount,bonus,rocket,maxLife,minL
     for (var  i = 0; i<amount;i++){
         bullarray[i] = new this.bullet(startX,startY,colorInt,minLife,maxLife,bonus);
        if (!bonus){
-        bullarray[i].xdir = random(-1,1)*10;
-        bullarray[i].ydir = random(-1,1)*10;
+        bullarray[i].xdir = random(-1,1)*10/3;
+        bullarray[i].ydir = random(-1,1)*10/3;
         }
       else{
-        bullarray[i].xdir = random(-0.5,0.5)*10;
-        bullarray[i].ydir = random(-0.3,-1.2)*10;
+        bullarray[i].xdir = random(-0.5,0.5)*10/3;
+        bullarray[i].ydir = random(-0.3,-1.2)*10/3;
       }
     }
     this.life = 0;
@@ -90,7 +90,7 @@ var explosion = function(startX,startY,colorInt,amount,bonus,rocket,maxLife,minL
          bullarray[i].x+=bullarray[i].xdir;
          bullarray[i].y+=bullarray[i].ydir;
          bullarray[i].size-=(bullarray[i].size/100);
-         bullarray[i].life--;
+         bullarray[i].life-=1/3;
 
         }
         else if (!bullarray[i].exploded){
@@ -114,9 +114,10 @@ void draw() {
  for (var i = 0; i<explarray.length;i++){
   explarray[i].draw();   
  }
+ pushMatrix();
  translate(width/2,height/2);
  scale(0.2);
-
+ popMatrix();
 };
 
 
