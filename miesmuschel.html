@@ -35,7 +35,7 @@ void setup(){
 //teamwork von Lauritz & Alessa 
 //magische Miesmuschel
 var ausgabeSammlung = ["NEIN","NICHTS","JA","VIELLEICHT"];
-var ringXStart = window.innerWidth/2-window.innerWidth/4+360;
+var ringXStart = window.innerWidth/2-window.innerWidth/4+360-100;
 var ringYStart = window.innerHeight/2-window.innerHeight/2+237;
 var ringX = ringXStart;
 var ringY = ringYStart;
@@ -86,18 +86,18 @@ var drawSprechblaße = function(x,y,width){
     rectMode(CENTER);
     fill(212, 212, 212);
     strokeWeight(2);   
-    rect(0+x,0+y,width,100,10);
+    rect(0+x,0+y,window.innerWidth/2,100,10);
     noStroke();
     
     fill(54, 49, 49);
-    triangle(249,282,238,308,290,310);
+    triangle(249+window.innerWidth/4,282,238+window.innerWidth/4,308,290+window.innerWidth/4,310);
     fill(212, 212, 212);
-    triangle(250,286,236,319,300,319);
+    triangle(250+window.innerWidth/4,286,236+window.innerWidth/4,319,300+window.innerWidth/4,319);
     fill(56, 56, 56);
     
     textAlign(CENTER,CENTER);
     textSize(81);
-    text(ausgabeWort,250,358);
+    text(ausgabeWort,window.innerWidth/2,358);
     bubbleLife--;    
     }
 };
@@ -244,9 +244,9 @@ void draw() {
     //drawBackground();
     background(11, 161, 181);
     noStroke();
-    drawConch(window.innerWidth/2-window.innerWidth/4,window.innerHeight/2-window.innerHeight/2);
+    drawConch(window.innerWidth/2-window.innerWidth/4-100,window.innerHeight/2-window.innerHeight/2);
     drawRing(ringX,ringY);
-    drawSprechblaße(width/2,358,ausgabeWort.length*55);
+    drawSprechblaße(window.innerWidth/2,358,ausgabeWort.length*55);
     zurückKehren();
     
 };
