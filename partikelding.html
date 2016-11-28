@@ -47,16 +47,25 @@ public var explarray = [];
 
 var explosion = function(startX,startY,colorInt,amount,bonus,maxLife,minLife){
     
-    this.x = startX;
-    this.y = startY;
+
+    //wird aktuell nichtma benutzt, vll später sinnvoll
+    //this.x = startX;
+    //this.y = startY;
+    
+    //dadurch wird im Falle der Startraketen das Y auf den unteren Rand gesetzt
+
     if (bonus){
     startY = window.innerHeight;
     }
 
-    
+    //ähnlich wie der explarray wird dieser Array benutzt um alle einzelnen Raketen zu speichern 
+    //bemerke: meine Raketen heißen aktuell noch Bullets
+
     var bullarray = [];
     
-    fill(255, 191, 0);
+    //bullet ist eine Variable von Explosion, 
+    //da eine einzelne rakete immer teil einer explosion sein muss
+    //eine einzelne bullet speichert haufenweiße kram wie seine position, seine zeit bis es verschwindet, und seine Farbe
     
     this.bullet = function(xpos,ypos,roundedInt,lifem,lifep,mitboom){
       this.x = xpos;
@@ -66,12 +75,12 @@ var explosion = function(startX,startY,colorInt,amount,bonus,maxLife,minLife){
       this.life  = random(lifem,lifep)   / 3;
       this.precolor = [
       color(255,255,255)
-      ,color(204+random(-20,20),255+random(-20,20),0+random(-20,20))
-      ,color(0+random(-20,20),255+random(-20,20),255,+random(-20,20))
-      ,color(191+random(-20,20),0+random(-20,20),255+random(-20,20))
-      ,color(0+random(-20,20),255+random(-20,20),9+random(-20,20))
-      ,color(255+random(-20,20),0+random(-20,20),85+random(-20,20))
-      ,color(255+random(-20,20),153+random(-20,20),0+random(-20,20))
+      ,color(180+random(-30,20),230+random(-50,50),0+random(-20,20))
+      ,color(0+random(-50,20),220+random(-50,50),220+random(-20,20))
+      ,color(180+random(-20,20),0+random(-20,20),2210+random(-20,20))
+      ,color(0+random(-60,20),255+random(-20,20),9+random(-20,20))
+      ,color(210+random(-30,20),0+random(-20,20),85+random(-20,20))
+      ,color(200+random(-20,20),153+random(-20,20),0+random(-20,20))
       ];
       this.size = ceil(random(10,35)/3);
       this.color = this.precolor[roundedInt];
@@ -112,8 +121,10 @@ var explosion = function(startX,startY,colorInt,amount,bonus,maxLife,minLife){
         bullarray[i].exploded = true;
 
         }
+       
        }
-       }
+       
+      }
 
         
     };
@@ -134,6 +145,7 @@ void draw() {
   explarray[i].draw();   
  }
 };
+
 
 
 //bei jedem Mausclick wird eine neue "StartExplosion", erstellt und angehängt
