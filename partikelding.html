@@ -16,21 +16,35 @@
 
 <script src="processing.js"></script>
 <script type="text/processing" data-processing-target="mycanvas">
+//processing.js code fängt hier an 
+//von Lauritz Kramberger, mittelmäßig auskommentiert und erklärt
+//fragen können reingeforkt werden lol
+
 void setup(){
+  //Start Setup, notwendig ohne Dalton.
+  //Fenster bekommt die größe des Ganzen Window bei 60fps
+  //hintergrundfarbe für spätere überlagerung NICHT auf 0,0,0
 	
-
-	size(window.innerWidth,window.innerHeight);
-
+  size(window.innerWidth,window.innerHeight);
 	frameRate(60);
 	background(20, 20, 20);
 
 }
 
-
-  
-
+//Das Feuerwerk baut sich auf aus Raketen und Explosionen
+//eine Explosion sind mehrere Raketen
+//In diesem Array sind alle Explosionen gespeichert, damit man auf alle einzeln zugreifen kann,
+//ohne allen explosionen eigene Namen geben zu müssen
+//das ganze ist "public" damit ich von überall drauf zugreifen kann
+//ist aber glaube ich redundant
 
 public var explarray = [];
+
+//eine Explosion besteht aus vielen Eigenschaften, die mit dem Aufruf angegeben werden können
+//besonders daran sind imo colorInt und bonus
+//colorInt gibt die Farbe gezielt an
+//bonus gibt an ob die Rakete noch einmal explodiert oder nicht.
+
 var explosion = function(startX,startY,colorInt,amount,bonus,maxLife,minLife){
     
     this.x = startX;
@@ -51,13 +65,13 @@ var explosion = function(startX,startY,colorInt,amount,bonus,maxLife,minLife){
       this.ydir = 0;
       this.life  = random(lifem,lifep)   / 3;
       this.precolor = [
-      [random(200,230),random(100,150),random(0,80)]
-      ,[random(100,150),random(200,220),random(50,80)]
-      ,[random(200,230),random(100,150),random(0,200)]
-      ,[0+random(-30,30),100+random(-30,30),50+random(-30,30)]
-      ,[100+random(-30,30),30+random(-30,30),130+random(-30,30)]
-      ,[50+random(-30,30),160+random(-30,30),30+random(-30,30)]
-      ,[255+random(-30,30),255+random(-30,30),255+random(-30,30)]
+      color(255,255,255)
+      ,color(204+random(-20,20),255+random(-20,20),0+random(-20,20))
+      ,color(0+random(-20,20),255+random(-20,20),255,+random(-20,20))
+      ,color(191+random(-20,20),0+random(-20,20),255+random(-20,20))
+      ,color(0+random(-20,20),255+random(-20,20),9+random(-20,20))
+      ,color(255+random(-20,20),0+random(-20,20),85+random(-20,20))
+      ,color(255+random(-20,20),153+random(-20,20),0+random(-20,20))
       ];
       this.size = ceil(random(10,35)/3);
       this.color = this.precolor[roundedInt];
@@ -84,8 +98,8 @@ var explosion = function(startX,startY,colorInt,amount,bonus,maxLife,minLife){
         for (var i = 0; i<amount;i++){
         if(bullarray[i].life+5>=0){
           if (((bullarray[i].life>=0)&&(!(bullarray[i].exploded))||bullarray[i].mitBonus)){      
-         fill(bullarray[i].color[0],bullarray[i].color[1],bullarray[i].color[2]);
-         stroke(bullarray[i].color[0]+10,bullarray[i].color[1]+10,bullarray[i].color[2]+10);
+         fill(bullarray[i].color);
+         stroke(bullarray[i].color);
          ellipse(bullarray[i].x,bullarray[i].y,bullarray[i].size,bullarray[i].size);  
          bullarray[i].x+=bullarray[i].xdir;
          bullarray[i].y+=bullarray[i].ydir;
@@ -94,7 +108,7 @@ var explosion = function(startX,startY,colorInt,amount,bonus,maxLife,minLife){
 
         }
         else if (!bullarray[i].exploded){
-        append(explarray,new explosion(bullarray[i].x,bullarray[i].y,round(random(0,5)),100,false,50,20));
+        append(explarray,new explosion(bullarray[i].x,bullarray[i].y,round(random(1,6)),100,false,50,20));
         bullarray[i].exploded = true;
 
         }
@@ -109,21 +123,22 @@ var explosion = function(startX,startY,colorInt,amount,bonus,maxLife,minLife){
 background(0, 0, 0);
 
 void draw() {
+ 
+ //in jedem durchlauf wird das bild mit 20% schwarz überlagert
  fill(10, 10, 10,20);
  rect(-5,-5,10000,10000);  
- for (var i = 0; i<explarray.length;i++){
+ 
+ //geht alle explosionen durch und versucht sie zu zeichnen
+ //bereits abgelaufene werden erst in der .draw() ignoriert 
+  for (var i = 0; i<explarray.length;i++){
   explarray[i].draw();   
  }
- pushMatrix();
- translate(width/2,height/2);
- scale(0.2);
- popMatrix();
 };
 
 
-
+//bei jedem Mausclick wird eine neue "StartExplosion", erstellt und angehängt
 void mousePressed(){
-    append(explarray,new explosion(mouseX,mouseY,6,6,true,200,80));
+    append(explarray,new explosion(mouseX,mouseY,0,6,true,200,80));
 };
 
 
