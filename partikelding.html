@@ -31,11 +31,11 @@ void setup(){
 
 
 public var explarray = [];
-var explosion = function(startX,startY,colorInt,amount,bonus,rocket,maxLife,minLife){
+var explosion = function(startX,startY,colorInt,amount,bonus,maxLife,minLife){
     
     this.x = startX;
     this.y = startY;
-    if (rocket){
+    if (bonus){
     startY = window.innerHeight;
     }
 
@@ -94,7 +94,7 @@ var explosion = function(startX,startY,colorInt,amount,bonus,rocket,maxLife,minL
 
         }
         else if (!bullarray[i].exploded){
-        append(explarray,new explosion(bullarray[i].x,bullarray[i].y,round(random(0,5)),100,false,false,50,20));
+        append(explarray,new explosion(bullarray[i].x,bullarray[i].y,round(random(0,5)),100,false,50,20));
         bullarray[i].exploded = true;
 
         }
@@ -123,7 +123,7 @@ void draw() {
 
 
 void mousePressed(){
-    append(explarray,new explosion(mouseX,mouseY,6,10,true,true,200,80));
+    append(explarray,new explosion(mouseX,mouseY,6,6,true,200,80));
 };
 
 
