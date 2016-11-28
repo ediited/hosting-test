@@ -251,7 +251,7 @@ void draw() {
     
 };
 
-void mouseDragged(){
+void touchMove(){
     if (((pmouseX-20<ringX)&&(pmouseX+20>ringX)&&((pmouseY-20<ringY)&&(pmouseY+20>ringY)))){
         ringX=mouseX;
         ringY=mouseY;
@@ -260,7 +260,7 @@ void mouseDragged(){
     }
 };
 
-void mouseReleased(){
+void touchEnd(){
     schrittX = floor((ringXStart-mouseX)/20);
     schrittY = floor((ringYStart-mouseY)/20);
     nichtzurück = false;
