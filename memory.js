@@ -2,7 +2,7 @@
 
 
 var withballs = false;
-
+var touched = false;
 var x = 0;
 function setup(){
   createCanvas(window.innerWidth,window.innerHeight);
@@ -18,7 +18,7 @@ function draw() {
   translate(window.innerWidth/2,window.innerHeight/2);
 
 
-  if(mouseIsPressed){    
+  if(mouseIsPressed||touched){    
     fill(255,255,255,30);
     rect(-width,-height,width*2,height*2);
   noStroke();
@@ -42,7 +42,14 @@ line(cos(i+mouseY-height/2)*(mouseX-width/2),sin(i+mouseY-height/2)*(mouseX-widt
 
 };
 
+function touchStarted(){
+  touched = true;
 
+}
+
+function touchEnded(){
+  touched = false;
+}
 
 /*
 
