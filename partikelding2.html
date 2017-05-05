@@ -59,15 +59,15 @@ var explosion = function(startX,startY,colorInt,amount,bonus,maxLife,minLife){
     }
 
     //ähnlich wie der explarray wird dieser Array benutzt um alle einzelnen Raketen zu speichern 
-    //bemerke: meine Raketen heißen aktuell noch Bullets
+    //bemerke: meine Raketen heißen aktuell noch rockets
 
     var bullarray = [];
     
-    //bullet ist eine Variable von Explosion, 
+    //rocket ist eine Variable von Explosion, 
     //da eine einzelne rakete immer teil einer explosion sein muss
-    //eine einzelne bullet speichert haufenweiße kram wie seine position, seine zeit bis es verschwindet, und seine Farbe
+    //eine einzelne rocket speichert haufenweiße kram wie seine position, seine zeit bis es verschwindet, und seine Farbe
     
-    this.bullet = function(xpos,ypos,roundedInt,lifem,lifep,mitboom){
+    this.rocket = function(xpos,ypos,roundedInt,lifem,lifep,mitboom){
       this.x = xpos;
       this.y = ypos;
       this.xdir = 0;
@@ -90,7 +90,7 @@ var explosion = function(startX,startY,colorInt,amount,bonus,maxLife,minLife){
     
     
     for (var  i = 0; i<amount;i++){
-        bullarray[i] = new this.bullet(startX,startY,colorInt,minLife,maxLife,bonus);
+        bullarray[i] = new this.rocket(startX,startY,colorInt,minLife,maxLife,bonus);
        if (!bonus){
         bullarray[i].xdir = random(-1,1)*10/3;
         bullarray[i].ydir = random(-1,1)*10/3;
@@ -133,12 +133,12 @@ var explosion = function(startX,startY,colorInt,amount,bonus,maxLife,minLife){
 };
 background(10, 10, 10);
 
+
+
 function draw() {
- 
  //in jedem durchlauf wird das bild mit 20% schwarz überlagert
  fill(0, 0, 0,20);
  rect(-5,-5,10000,10000);  
- 
  //geht alle explosionen durch und versucht sie zu zeichnen
  //bereits abgelaufene werden erst in der .draw() ignoriert 
   for (var i = 0; i<explarray.length;i++){
@@ -150,7 +150,7 @@ function draw() {
 
 //bei jedem Mausclick wird eine neue "StartExplosion", erstellt und angehängt
 function mousePressed(){
-    append(explarray,new explosion(mouseX,mouseY,0,6,true,200,80));
+    append(explarray,new explosion(mouseX,mouseY,0,6,true,200,50));
 };
 
 
