@@ -1,54 +1,53 @@
-
-
-
 var withballs = false;
 var touched = false;
 var x = 0;
-function setup(){
-  createCanvas(window.innerWidth,window.innerHeight);
-frameRate(120);
 
-background(255,255,255);
+function setup() {
+    createCanvas(window.innerWidth, window.innerHeight);
+    frameRate(120);
 
-fill(0,0,0);
-rect(-width,-height,width*2,height*2);
+    background(255, 255, 255);
+
+    fill(0, 0, 0);
+    rect(-width, -height, width * 2, height * 2);
 
 }
+
 function draw() {
-  translate(window.innerWidth/2,window.innerHeight/2);
+    translate(window.innerWidth / 2, window.innerHeight / 2);
 
 
-  if(mouseIsPressed||touched){    
-    fill(255,255,255,30);
-    rect(-width,-height,width*2,height*2);
-  noStroke();
-  stroke(53, 242, 233);
-for (var i = 360;i>0;i-=1){ 
-    fill(40, 237, 237);
+    if (mouseIsPressed || touched) {
+        fill(255, 255, 255, 30);
+        rect(-width, -height, width * 2, height * 2);
+        noStroke();
+        stroke(53, 242, 233);
+        for (var i = 360; i > 0; i -= 1) {
+            fill(40, 237, 237);
 
-line((mouseX-width/2)*cos(mouseX*i),(mouseY-height/2)*sin(mouseY*i),(mouseX-width/2)*cos(mouseX*(i-1)),(mouseY-height/2)*sin(mouseY*(i-1)));
+            line((mouseX - width / 2) * cos(mouseX * i), (mouseY - height / 2) * sin(mouseY * i), (mouseX - width / 2) * cos(mouseX * (i - 1)), (mouseY - height / 2) * sin(mouseY * (i - 1)));
 
-if (withballs){
-ellipse((mouseX-width/2)*cos(mouseX*i),(mouseY-height/2)*sin(mouseY*i),5+25*((mouseX-width/2)*cos(mouseX*i))/-width/2,5+25*((mouseX-width/2)*cos(mouseX*i))/-width/2);
-ellipse((mouseX-width/2)*cos(mouseX*i),(mouseY-height/2)*sin(mouseY*i),5+25*((mouseX-width/2)*cos(mouseX*i))/width/2,5+25*((mouseX-width/2)*cos(mouseX*i))/width/2);
+            if (withballs) {
+                ellipse((mouseX - width / 2) * cos(mouseX * i), (mouseY - height / 2) * sin(mouseY * i), 5 + 25 * ((mouseX - width / 2) * cos(mouseX * i)) / -width / 2, 5 + 25 * ((mouseX - width / 2) * cos(mouseX * i)) / -width / 2);
+                ellipse((mouseX - width / 2) * cos(mouseX * i), (mouseY - height / 2) * sin(mouseY * i), 5 + 25 * ((mouseX - width / 2) * cos(mouseX * i)) / width / 2, 5 + 25 * ((mouseX - width / 2) * cos(mouseX * i)) / width / 2);
 
 
-}
-/*
-line(cos(i+mouseY-height/2)*(mouseX-width/2),sin(i+mouseY-height/2)*(mouseX-width/2),cos(i+pmouseY-height/2)*(pmouseX-width/2),sin(i+pmouseY-height/2)*(pmouseX-width/2)); 
-*/
-}
-}
+            }
+            /*
+            line(cos(i+mouseY-height/2)*(mouseX-width/2),sin(i+mouseY-height/2)*(mouseX-width/2),cos(i+pmouseY-height/2)*(pmouseX-width/2),sin(i+pmouseY-height/2)*(pmouseX-width/2)); 
+            */
+        }
+    }
 
 };
 
-function touchStarted(){
-  touched = true;
+function touchStarted() {
+    touched = true;
 
 }
 
-function touchEnded(){
-  touched = false;
+function touchEnded() {
+    touched = false;
 }
 
 /*
@@ -71,9 +70,6 @@ line(cos(i+mouseY-height/2)*(mouseX-width/2),sin(i+mouseY-height/2)*(mouseX-widt
 
 
 */
-
-
-
 
 
 
