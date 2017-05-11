@@ -14,5 +14,6 @@ function setup() {
 }
 
 function draw(){
-  background(abs(rotationX),abs(rotationY),abs(rotationZ));
+  fill(abs(rotationX),abs(rotationY),abs(rotationZ));
+  rect(100,100,100,100);
 }
