@@ -18,7 +18,7 @@ function draw(){
 
 
 
-  fill(Math.abs(rotationX),Math.abs(rotationY),Math.abs(rotationZ));
+  fill(Math.abs(rotationX-180),Math.abs(rotationY-180),Math.abs(rotationZ-180));
   
   rect(0,0,window.innerWidth,window.innerHeight);
 

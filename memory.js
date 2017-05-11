@@ -50,6 +50,16 @@ function touchEnded() {
     touched = false;
 }
 
+function keyPressed(){
+
+if (keyCode==83){
+
+  save();
+}  
+}
+
+
+
 /*
 
 
