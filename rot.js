@@ -4,7 +4,7 @@ var x = 0;
 
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
-    frameRate(120);
+    frameRate(10);
 
     background(255, 255, 255);
 
