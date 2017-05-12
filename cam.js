@@ -16,7 +16,7 @@ function setup() {
 
 
 var drawVid = false;
-var stepSize = 15; 
+var stepSize = 30; 
 
 function draw() {
   fill(0,0,0);
