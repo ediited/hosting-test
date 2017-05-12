@@ -29,7 +29,7 @@ function setup(){
   createCanvas(window.innerWidth,window.innerHeight);
 	frameRate(60);
 	background(20, 20, 20);
-
+  //filter(BLUR,3)
 }
 
 //Das Feuerwerk baut sich auf aus Raketen und Explosionen
@@ -138,6 +138,7 @@ background(10, 10, 10);
 
 function draw() {
  //in jedem durchlauf wird das bild mit 20% schwarz überlagert
+ 
  blendMode(BLEND);
  fill(0, 0, 0,20);
  rect(-5,-5,10000,10000);  
@@ -147,13 +148,15 @@ function draw() {
  blendMode(SCREEN);
   explarray[i].draw();   
  }
+
+
 };
 
 
 
 //bei jedem Mausclick wird eine neue "StartExplosion", erstellt und angehängt
 function mousePressed(){
-    append(explarray,new explosion(mouseX,mouseY,0,6,true,200,50));
+    append(explarray,new explosion(mouseX,mouseY,round(random(1,6)),50,false,250,50));
 };
 
 

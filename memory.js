@@ -59,7 +59,14 @@ if (keyCode==83){
 }  
 }
 
+function replcolor(){
+  for ( var i = window.innerWidth;i>0;i--){
+    for (var j = window.innerHeight;i>0;i--){
 
+
+    }
+  }
+}
 
 /*
 
