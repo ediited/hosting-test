@@ -10,6 +10,7 @@ function setup() {
 
     fill(0, 0, 0);
     rect(-width, -height, width * 2, height * 2);
+   // blendMode(SOFT_LIGHT); 
 
 }
 

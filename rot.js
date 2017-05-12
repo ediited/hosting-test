@@ -27,7 +27,7 @@ function draw(){
 
   textAlign(CENTER,CENTER);
   fill(0,0,0);
-  text(rotationX+"x, "+rotationY+"y, "+rotationZ+"z, ", window.innerWidth/2 , window.innerHeight-30);
+  text(round(rotationX*100)/100+"x, "+round(rotationY*100)/100+"y, "+round(rotationZ*100)/100+"z, ", window.innerWidth/2 , window.innerHeight-30);
   
 
 }
