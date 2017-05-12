@@ -19,7 +19,7 @@ function draw() {
 
 
     if (mouseIsPressed || touched) {
-        fill(255, 255, 255, 30);
+        fill(30,30,30, 30);
         rect(-width, -height, width * 2, height * 2);
         noStroke();
         stroke(53, 242, 233);
