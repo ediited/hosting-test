@@ -1,0 +1,135 @@
+<html>
+<body>
+<style type="text/css">
+	body,html{
+	width:100%;
+	height: 100%;
+	margin:0;
+	padding:0;
+	overflow:hidden;
+	}
+	canvas{
+	position:absolute;
+
+	}
+</style>
+
+<script src="libraries/p5.js"></script>
+<script>
+
+
+var Auto = function(startX,startY){
+
+
+
+	this.currentX = startX;
+	this.currentY = startY;
+	this.directionX = 0;
+	this.directionY = 0;
+	this.targetX=this.currentX;
+	this.targetY=this.currentY;
+	
+
+	
+	this.move = function(){
+		if(round(this.currentX)==round(this.targetX)){
+			this.directionX = 0;
+			this.directionY = 0;
+		}
+
+		this.currentX+=this.directionX;
+		this.currentY+=this.directionY;
+	}
+	
+	this.drawCar = function(){
+
+		fill(0);
+		rectMode(CENTER,CENTER);
+		rect(this.currentX,this.currentY,10,10,2,2);
+	}
+
+
+
+	
+}
+
+
+
+
+</script>
+
+<script data-processing-target="mycanvas">
+
+//die "Hausnummern" unserer Autos, da wir sonst unsere Autos im Speicher des Computers nie wieder finden.
+var autoArray = [];
+var autoNum = 100;
+
+
+
+//eine Standartfunktion aus p5.js, wird beim start der website ausgeführt
+function setup(){			
+	createCanvas(windowWidth,windowHeight);							//erstellt das canvas / das was man später sieht, 
+																	//wWidth & wHeight sind die maße des Fensters
+	background(120);			
+
+	//erstellt alle Autos und packt sie in die "Häuser" des Arrays.
+	//erstellt        30 	Autos 
+	for (var i = 0; i<autoNum ; i++){
+
+
+		autoArray[i] = new Auto(-10,-10);	//erstellt unserer Autos an zufälligen stellen 
+																	//width ist die breite des canvas (NICHT des Fensters)
+		
+	}
+
+}
+
+//standartfunktion aus p5.js, zeichnet 30 mal/s das bild auf das canvas
+function draw(){
+
+	fill(120,120,120,80);											//Zeichnet den Hintergrund
+	rect(-10,-10,10000,10000);
+	//geht alle 	  30  stellen des Arrays durch
+	for (var i = 0; i<autoNum; i++){
+		
+		autoArray[i].move();	
+		//debugger;									//fordert die bewegung des Autos
+		autoArray[i].drawCar();										//fordert den draw des Autos
+
+	}
+
+	for(var i = 0; i <autoNum-1;i++){
+
+		line(autoArray[i].targetX,autoArray[i].targetY,autoArray[i+1].targetX,autoArray[i+1].targetY);
+	}
+	if(count<autoArray.length-1&&count>1){
+	line(autoArray[count-1].targetX , autoArray[count-1].targetY , autoArray[count+1].targetX ,autoArray[count+1].targetY)
+	}
+	
+
+}
+
+var count = 0;
+
+
+
+function mouseDragged(){
+	count++;
+	if (count == autoArray.length){
+		count=0;
+	}	
+		autoArray[count].targetX=mouseX;
+		autoArray[count].targetY=mouseY;
+		autoArray[count].directionX=(mouseX-autoArray[count].currentX)/60;
+		autoArray[count].directionY=(mouseY-autoArray[count].currentY)/60;	
+	}
+
+function resize(){
+
+}
+
+</script>
+<canvas id="mycanvas"></canvas>
+</body>
+</html>
+
